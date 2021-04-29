@@ -1,12 +1,5 @@
-import {
-  App,
-  Modal,
-  Notice,
-  Plugin,
-  PluginSettingTab,
-  Setting,
-} from "obsidian";
-
+import { App, Plugin, PluginSettingTab, Setting, MarkdownView } from "obsidian";
+import { MarkdownIndex } from "./MarkdownIndex";
 interface MyPluginSettings {
   mySetting: string;
 }
@@ -19,52 +12,20 @@ export default class MyPlugin extends Plugin {
   settings: MyPluginSettings;
 
   async onload() {
-    console.log("loading plugin");
-
     await this.loadSettings();
 
-    this.addRibbonIcon("dice", "Sample Plugin", () => {
-      new Notice("This is a notice!");
-    });
-
-    this.addStatusBarItem().setText("Status Bar Text");
-
     this.addCommand({
-      id: "open-sample-modal",
-      name: "Open Sample Modal",
-      // callback: () => {
-      // 	console.log('Simple Callback');
-      // },
-      checkCallback: (checking: boolean) => {
-        let leaf = this.app.workspace.activeLeaf;
-        if (leaf) {
-          if (!checking) {
-            new SampleModal(this.app).open();
-          }
-          return true;
-        }
-        return false;
+      id: "add-markdown-index",
+      name: "add-markdown-index",
+      callback: () => {
+        this.addMarkdownIndex();
       },
     });
 
     this.addSettingTab(new SampleSettingTab(this.app, this));
-
-    this.registerCodeMirror((cm: CodeMirror.Editor) => {
-      console.log("codemirror", cm);
-    });
-
-    this.registerDomEvent(document, "click", (evt: MouseEvent) => {
-      console.log("click", evt);
-    });
-
-    this.registerInterval(
-      window.setInterval(() => console.log("setInterval"), 5 * 60 * 1000)
-    );
   }
 
-  onunload() {
-    console.log("unloading plugin");
-  }
+  onunload() {}
 
   async loadSettings() {
     this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
@@ -73,21 +34,17 @@ export default class MyPlugin extends Plugin {
   async saveSettings() {
     await this.saveData(this.settings);
   }
-}
-
-class SampleModal extends Modal {
-  constructor(app: App) {
-    super(app);
+  addMarkdownIndex() {
+    const editor = this.getEditor();
+    const lines = editor.getValue().split("\n");
+    const markdownIndex = new MarkdownIndex();
+    const newlines = markdownIndex.addMarkdownIndex(lines);
+    editor.setValue(newlines.join("\n"));
   }
 
-  onOpen() {
-    let { contentEl } = this;
-    contentEl.setText("Woah!");
-  }
-
-  onClose() {
-    let { contentEl } = this;
-    contentEl.empty();
+  getEditor() {
+    const mdView = this.app.workspace.getActiveViewOfType(MarkdownView);
+    return mdView.editor;
   }
 }
 
