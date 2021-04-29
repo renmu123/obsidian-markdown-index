@@ -1,10 +1,10 @@
 {
-	"id": "obsidian-markdown-index",
-	"name": "Sample Plugin",
-	"version": "1.0.1",
+	"id": "obsidian-title-index",
+	"name": "obsidian-title-index",
+	"version": "0.1",
 	"minAppVersion": "0.9.12",
-	"description": "This is a sample plugin for Obsidian. This plugin demonstrates some of the capabilities of the Obsidian API.",
-	"author": "Obsidian",
-	"authorUrl": "https://obsidian.md/about",
+	"description": "obsidian-title-index",
+	"author": "renmu123",
+	"authorUrl": "https://github.com/renmu123/obsidian-markdown-index",
 	"isDesktopOnly": false
 }
