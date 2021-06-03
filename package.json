@@ -1,6 +1,6 @@
 {
   "name": "obsidian-title-index",
-  "version": "0.1",
+  "version": "0.1.0",
   "description": "add title index",
   "main": "main.js",
   "scripts": {

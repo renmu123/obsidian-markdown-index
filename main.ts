@@ -36,10 +36,14 @@ export default class MyPlugin extends Plugin {
   }
   addMarkdownIndex() {
     const editor = this.getEditor();
+    const cursor = editor.getCursor();
+
     const lines = editor.getValue().split("\n");
     const markdownIndex = new MarkdownIndex();
     const newlines = markdownIndex.addMarkdownIndex(lines);
     editor.setValue(newlines.join("\n"));
+
+    editor.setCursor(cursor);
   }
 
   getEditor() {
