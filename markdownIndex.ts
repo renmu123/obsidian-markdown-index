@@ -77,7 +77,6 @@ export class MarkdownIndex {
     let seq = 1;
     while (cursor < content.length) {
       let markCount = this._countStartsWith((x: string) => {
-        console.log(x);
         return x == this._indexBase;
       }, content[cursor].split(""));
       if (markCount == targetMarkCount && markCount > lastMarkCount) {
