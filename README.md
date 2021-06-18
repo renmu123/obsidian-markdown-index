@@ -1,57 +1,62 @@
-## Obsidian Sample Plugin
+# Thank
+thanks [markdown_index](https://github.com/legendmohe/markdown_index)
 
-This is a sample plugin for Obsidian (https://obsidian.md).
+# Feature
+markdown_index is an extension that can add serial numbers to your markdown title.
 
-This project uses Typescript to provide type checking and documentation.
-The repo depends on the latest plugin API (obsidian.d.ts) in Typescript Definition format, which contains TSDoc comments describing what it does.
+Suppose the original text is as follows:
+```
+# a
+foolbar
 
-**Note:** The Obsidian API is still in early alpha and is subject to change at any time!
+## a-b
+foolbar
 
-This sample plugin demonstrates some of the basic functionality the plugin API can do.
-- Changes the default font color to red using `styles.css`.
-- Adds a ribbon icon, which shows a Notice when clicked.
-- Adds a command "Open Sample Modal" which opens a Modal.
-- Adds a plugin setting tab to the settings page.
-- Registers a global click event and output 'click' to the console.
-- Registers a global interval which logs 'setInterval' to the console.
+## a-c
+foolbar
+foolbar
 
-### First time developing plugins?
+### a-c-d
+foolbar
 
-Quick starting guide for new plugin devs:
+```
+    This is code block
+```
 
-- Make a copy of this repo as a template with the "Use this template" button (login to GitHub if you don't see it).
-- Clone your repo to a local development folder. For convenience, you can place this folder in your `.obsidian/plugins/your-plugin-name` folder.
-- Install NodeJS, then run `npm i` in the command line under your repo folder.
-- Run `npm run dev` to compile your plugin from `main.ts` to `main.js`.
-- Make changes to `main.ts` (or create new `.ts` files). Those changes should be automatically compiled into `main.js`.
-- Reload Obsidian to load the new version of your plugin.
-- Enable plugin in settings window.
-- For updates to the Obsidian API run `npm update` in the command line under your repo folder.
+## a-e
+foolbar
 
-### Releasing new releases
+    This is code block too
 
-- Update your `manifest.json` with your new version number, such as `1.0.1`, and the minimum Obsidian version required for your latest release.
-- Update your `versions.json` file with `"new-plugin-version": "minimum-obsidian-version"` so older versions of Obsidian can download an older version of your plugin that's compatible.
-- Create new GitHub release using your new version number as the "Tag version". Use the exact version number, don't include a prefix `v`. See here for an example: https://github.com/obsidianmd/obsidian-sample-plugin/releases
-- Upload the files `manifest.json`, `main.js`, `styles.css` as binary attachments.
-- Publish the release.
+# f
+foolbar
+```
 
-### Adding your plugin to the community plugin list
+Install markdown_index, run > markdown add index, you can automatically add the serial number, as follows:
 
-- Publish an initial version.
-- Make sure you have a `README.md` file in the root of your repo.
-- Make a pull request at https://github.com/obsidianmd/obsidian-releases to add your plugin.
+```
+# 1. a
+foolbar
 
-### How to use
+## 1.1. a-b
+foolbar
 
-- Clone this repo.
-- `npm i` or `yarn` to install dependencies
-- `npm run dev` to start compilation in watch mode.
+## 1.2. a-c
+foolbar
+foolbar
 
-### Manually installing the plugin
+### 1.2.1. a-c-d
+foolbar
 
-- Copy over `main.js`, `styles.css`, `manifest.json` to your vault `VaultFolder/.obsidian/plugins/your-plugin-id/`.
+```
+    This is code block
+```
 
-### API Documentation
+## 1.3. a-e
+foolbar
 
-See https://github.com/obsidianmd/obsidian-api
+    This is code block too
+
+# 2. f
+foolbar
+```
