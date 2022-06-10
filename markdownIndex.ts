@@ -58,13 +58,14 @@ export class MarkdownIndex {
     while (cursor < content.length) {
       let line = content[cursor];
 
+      // 忽略代码块
       if (line.startsWith("```")) {
         isInCodeArea = !isInCodeArea;
         cursor++;
         continue;
       }
 
-      if (isInCodeArea == false && line.startsWith(this._indexBase)) {
+      if (isInCodeArea === false && line.startsWith(this._indexBase)) {
         // find the start mark count
         targetMarkCount = this._countStartsWith((x: string) => {
           return x == this._indexBase;
