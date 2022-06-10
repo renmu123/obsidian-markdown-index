@@ -5,6 +5,8 @@
  *
  * modify by legendmohe
  */
+const REGEX_HEADING = /^(#+) (.*)/;
+
 export class MarkdownIndex {
   // index base configuration for user, default value is "#"
   private _indexBase: string = "#";
@@ -64,7 +66,7 @@ export class MarkdownIndex {
         continue;
       }
 
-      if (isInCodeArea == false && line.startsWith(this._indexBase)) {
+      if (isInCodeArea == false && line.match(REGEX_HEADING)) {
         // find the start mark count
         targetMarkCount = this._countStartsWith((x: string) => {
           return x == this._indexBase;
