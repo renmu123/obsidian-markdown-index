@@ -1,6 +1,6 @@
 import { Plugin, MarkdownView } from "obsidian";
-import { MarkdownIndex } from "./MarkdownIndex";
-// import { MarkdownIndex } from "./mdIndex";
+// import { MarkdownIndex } from "./MarkdownIndex";
+import { MarkdownIndex } from "./mdIndex";
 
 export default class titleIndexPlugin extends Plugin {
   async onload() {

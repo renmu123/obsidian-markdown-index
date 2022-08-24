@@ -1,6 +1,7 @@
 /**
  * The main class to add markdown index.
  */
+import treeTool from "tree-tool";
 interface LINE {
   line: number;
   value: string;
@@ -8,6 +9,8 @@ interface LINE {
   level: number;
   mark: number;
   index: number;
+  id: number;
+  pid: number;
 }
 
 export class MarkdownIndex {
@@ -50,11 +53,20 @@ export class MarkdownIndex {
           level: level,
           mark: 0,
           index: index,
+          id: line,
+          pid: null,
         });
         index += 1;
       }
     }
-    return data;
+    return data.map((item, index) => {
+      if (item.level === 1) {
+        item.pid = null;
+      } else {
+        item.pid = this.findLastParIndex(item, data.slice(0, index));
+      }
+      return item;
+    });
   }
 
   // if in areacode
@@ -75,51 +87,19 @@ export class MarkdownIndex {
     return count;
   }
   // 找到距离最近的上一级标签
-  findLastParIndex(data: LINE[], index: number) {
-    const level = data[index].level;
-    const sliceData = data.slice(0, index);
-
-    for (let line of [...sliceData].reverse()) {
-      if (line.level < level) {
-        return [line.level, line.index];
+  findLastParIndex(item: LINE, data: LINE[]) {
+    let value = -1;
+    data.forEach(element => {
+      if (element.level < item.level) {
+        value = element.id;
+        return;
       }
-    }
-    return [-1, -1];
-  }
-  findLastRelIndex(data: LINE[], lastIndex: number, index: number) {
-    const level = data[index].level;
-
-    const sliceData = data.slice(lastIndex + 1, index);
-    for (let line of [...sliceData].reverse()) {
-      if (line.level === level) {
-        return line.mark + 1;
-      }
-    }
-    return 1;
+    });
+    return value;
   }
 
   addIndex(content: string[], start: number = 1) {
     const data = this.getTitleData(content);
-    console.log(data);
-    for (let [i, line] of data.entries()) {
-      const index = this.findLastParIndex(data, line.index);
-      const mark = this.findLastRelIndex(data, index[1], i);
-      data[i].mark = mark;
-    }
-
-    for (let [i, line] of data.entries()) {
-      const index = this.findLastParIndex(data, line.index);
-      const mark = this.findLastRelIndex(data, index[1], i);
-      data[i].mark = mark;
-    }
-
-    for (let [i, line] of data.entries()) {
-    }
-
-    // for (let line of data) {
-    //   const index = line.line - 1;
-    //   content[index] = `${"#".repeat(line.level)} ${line.mark} ${line.content}`;
-    // }
     console.log(data);
   }
 
