@@ -1,6 +1,10 @@
 # Thank
 thanks [markdown_index](https://github.com/legendmohe/markdown_index)
 
+
+# How to use
+Press `ctrl + p` and then enter `add-markdown-index` .
+
 # Feature
 markdown_index is an extension that can add serial numbers to your markdown title.
 
